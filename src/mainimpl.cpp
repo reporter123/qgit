@@ -2091,7 +2091,7 @@ void MainImpl::ActAbout_activated() {
 	"Copyright (c) 2016 Pavel Karelin &lt;hkarel@yandex.ru&gt;<br>"
 	"Copyright (c) 2016 Zane Bitter &lt;zbitter@redhat.com&gt;<br>"
 	"Copyright (c) 2016 Robert Haschke &lt;rhaschke@techfak.uni-bielefeld.de&gt;<br>"
-	"Copyright (c) 2017 Andrey Rahmatullin $lt;wrar@wrar.name&gt;"
+	"Copyright (c) 2017 Andrey Rahmatullin &lt;wrar@wrar.name&gt;"
     "</p>"
 
 	"<p>This version was compiled against Qt " QT_VERSION_STR "</p>";
