@@ -1648,7 +1648,7 @@ void MainImpl::customAction_triggered(QAction* act) {
 
 	QSettings set;
 	QStringList actionsList = set.value(ACT_LIST_KEY).toStringList();
-	if (!(actionsList.contains(actionName) || actionsList.contains(actionName.remove(QChar('&'))))) {
+	if (!actionsList.contains(actionName.remove(QChar('&')))) {
 		dbp("ASSERT in customAction_activated, action %1 not found", actionName);
 		return;
 	}
