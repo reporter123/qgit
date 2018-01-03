@@ -983,7 +983,7 @@ const QString Git::getNewCommitMsg() {
 //CT TODO utility function; can go elsewhere
 const QString Git::colorMatch(SCRef txt, QRegExp& regExp) {
 
-	QString text = qt4and5escaping(txt);
+	QString text = toHTMLEscaped(txt);
 
 	if (regExp.isEmpty())
 		return text;
@@ -1046,9 +1046,9 @@ const QString Git::getDesc(SCRef sha, QRegExp& shortLogRE, QRegExp& longLogRE,
 
 		if (showHeader) {
 			if (c->committer() != c->author())
-				ts << formatList(QStringList(qt4and5escaping(c->committer())), "Committer");
+				ts << formatList(QStringList(toHTMLEscaped(c->committer())), "Committer");
 
-			ts << formatList(QStringList(qt4and5escaping(c->author())), "Author");
+			ts << formatList(QStringList(toHTMLEscaped(c->author())), "Author");
 			ts << formatList(QStringList(getLocalDate(c->authorDate())), " Author date");
 
 			if (c->isUnApplied || c->isApplied) {
@@ -1093,7 +1093,7 @@ const QString Git::getDesc(SCRef sha, QRegExp& shortLogRE, QRegExp& longLogRE,
 			if (slog.length() > 60)
 				slog = slog.left(57).trimmed().append("...");
 
-			const QString link("<a href=\"" + r->sha() + "\">" + qt4and5escaping(slog) + "</a>");
+			const QString link("<a href=\"" + r->sha() + "\">" + toHTMLEscaped(slog) + "</a>");
 			text.replace(pos + 2, ref.length(), link);
 			pos += link.length();
 		} else
@@ -1885,12 +1885,9 @@ Rev* Git::fakeRevData(SCRef sha, SCList parents, SCRef author, SCRef date, SCRef
         if (!patch.isEmpty())
                 data.append('\n' + patch);
 
-#if QT_VERSION >= 0x050000
         QTextCodec* tc = QTextCodec::codecForLocale();
         QByteArray* ba = new QByteArray(tc->fromUnicode(data));
-#else
-        QByteArray* ba = new QByteArray(data.toLatin1());
-#endif
+
         ba->append('\0');
 
         fh->rowData.append(ba);
