@@ -1026,12 +1026,8 @@ void MainImpl::shortCutActivated() {
 	QShortcut* se = dynamic_cast<QShortcut*>(sender());
 
 	if (se) {
-		#if QT_VERSION >= 0x050000
-			const QKeySequence& keys = se->key();
-			const int key = keys[0];//This only checks the primary key sequence. There are four posiable.
-		#else
-			const int key = se->key();
-		#endif
+		const QKeySequence& keys = se->key();
+		const int key = keys[0];//This only checks the primary key sequence. There are four posiable.
 
 		switch(key)
 		{

@@ -5,7 +5,7 @@
 # see also http://stackoverflow.com/questions/16245147/unable-to-include-a-ui-form-header-of-qt5-in-cmake
 # see also http://www.qtcentre.org/wiki/index.php?title=Compiling_Qt4_apps_with_CMake
 #
-cmake_minimum_required(VERSION 2.8.11)
+cmake_minimum_required(VERSION 2.8.12)
 
 project(qgit)
 include(GNUInstallDirs)
@@ -17,28 +17,16 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Instruct CMake to run moc automatically when needed.
 set(CMAKE_AUTOMOC ON)
 
-option(UseQt5 "Use Qt5?" ON)
-if (UseQt5)
-  find_package(Qt5 REQUIRED COMPONENTS Core Widgets)
-  set(QT_LIBRARIES Qt5::Widgets)
+find_package(Qt5 REQUIRED COMPONENTS Core Widgets)
+set(QT_LIBRARIES Qt5::Widgets)
 
-  macro(qt_wrap_ui)
-    qt5_wrap_ui(${ARGN})
-  endmacro()
-  macro(qt_add_resources)
-    qt5_add_resources(${ARGN})
-  endmacro()
-else()
-  find_package(Qt4 REQUIRED COMPONENTS QtCore QtGui)
-  include(${QT_USE_FILE})
+macro(qt_wrap_ui)
+  qt5_wrap_ui(${ARGN})
+endmacro()
 
-  macro(qt_wrap_ui)
-    qt4_wrap_ui(${ARGN})
-  endmacro()
-  macro(qt_add_resources)
-    qt4_add_resources(${ARGN})
-  endmacro()
-endif()
+macro(qt_add_resources)
+  qt5_add_resources(${ARGN})
+endmacro()
 
 include_directories(
     ${CMAKE_SOURCE_DIR}/src
