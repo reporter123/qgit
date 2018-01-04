@@ -9,6 +9,7 @@ cmake_minimum_required(VERSION 2.8.12)
 
 project(qgit)
 include(GNUInstallDirs)
+include(FeatureSummary)
 
 # As moc files are generated in the binary dir, tell CMake
 # to always look for includes there:
@@ -98,6 +99,8 @@ if (UNIX)
     install(FILES qgit.desktop DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/applications)
     install(FILES qgit.appdata.xml DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/metainfo)
 endif()
+
+feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
 # kate: indent-width 4; replace-tabs on;
 
